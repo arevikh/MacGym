@@ -5,6 +5,8 @@ Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "MacGym", "MacGym\MacGym.ccp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacGym_WebRole", "MacGym_WebRole\MacGym_WebRole.csproj", "{7135820E-1F8B-480B-8B6B-F4E725C83D18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacGym_DB", "MacGym_DB\MacGym_DB.csproj", "{4A2D1645-0251-4052-AA8C-FF2238BD6A04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{7135820E-1F8B-480B-8B6B-F4E725C83D18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7135820E-1F8B-480B-8B6B-F4E725C83D18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7135820E-1F8B-480B-8B6B-F4E725C83D18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A2D1645-0251-4052-AA8C-FF2238BD6A04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A2D1645-0251-4052-AA8C-FF2238BD6A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A2D1645-0251-4052-AA8C-FF2238BD6A04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A2D1645-0251-4052-AA8C-FF2238BD6A04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

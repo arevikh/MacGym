@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MacGym" Class="MacGymDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\sqlexpress;Initial Catalog=MacGym;Persist Security Info=True;User ID=sa" SettingsObjectName="MacGym_DB.Properties.Settings" SettingsPropertyName="MacGymConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.BodyParts" Member="BodyParts">
+    <Type Name="BodyPart">
+      <Column Name="bodyPartID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="BodyPart_WorkoutBodyPart" Member="WorkoutBodyParts" ThisKey="bodyPartID" OtherKey="bodyPartID" Type="WorkoutBodyPart" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WorkoutTools" Member="WorkoutTools">
+    <Type Name="WorkoutTool">
+      <Column Name="workoutToolID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="workoutID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="toolID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Tool_WorkoutTool" Member="Tool" ThisKey="toolID" OtherKey="toolID" Type="Tool" IsForeignKey="true" />
+      <Association Name="Workout_WorkoutTool" Member="Workout" ThisKey="workoutID" OtherKey="workoutID" Type="Workout" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tools" Member="Tools">
+    <Type Name="Tool">
+      <Column Name="toolID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Tool_WorkoutTool" Member="WorkoutTools" ThisKey="toolID" OtherKey="toolID" Type="WorkoutTool" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WorkoutBodyParts" Member="WorkoutBodyParts">
+    <Type Name="WorkoutBodyPart">
+      <Column Name="workoutBodyPartID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="workoutID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bodyPartID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="BodyPart_WorkoutBodyPart" Member="BodyPart" ThisKey="bodyPartID" OtherKey="bodyPartID" Type="BodyPart" IsForeignKey="true" />
+      <Association Name="Workout_WorkoutBodyPart" Member="Workout" ThisKey="workoutID" OtherKey="workoutID" Type="Workout" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Workouts" Member="Workouts">
+    <Type Name="Workout">
+      <Column Name="workoutID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="shortDescription" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="longDescription" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Workout_WorkoutTool" Member="WorkoutTools" ThisKey="workoutID" OtherKey="workoutID" Type="WorkoutTool" />
+      <Association Name="Workout_WorkoutBodyPart" Member="WorkoutBodyParts" ThisKey="workoutID" OtherKey="workoutID" Type="WorkoutBodyPart" />
+    </Type>
+  </Table>
+</Database>

@@ -179,6 +179,12 @@
   <ItemGroup>
     <Content Include="styles\less\base.less" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MacGym_DB\MacGym_DB.csproj">
+      <Project>{4a2d1645-0251-4052-aa8c-ff2238bd6a04}</Project>
+      <Name>MacGym_DB</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
