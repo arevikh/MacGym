@@ -29,5 +29,11 @@ namespace MacGym_DB
         {
             return DB.Workouts.ToList();
         }
+
+        public List<Workout> Get(int toolID, int bodyPartID)
+        {
+            return DB.Workouts.Where(w => (toolID == 0 || w.WorkoutTools.Count(t => t.toolID == toolID) > 0) &&
+                                          (bodyPartID == 0 || w.WorkoutBodyParts.Count(b => b.bodyPartID == bodyPartID) > 0)).ToList();
+        }
     }
 }

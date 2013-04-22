@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MacGym" Class="MacGymDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.\sqlexpress;Initial Catalog=MacGym;Persist Security Info=True;User ID=sa" SettingsObjectName="MacGym_DB.Properties.Settings" SettingsPropertyName="MacGymConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=mushegh\sqlexpress;Initial Catalog=MacGym;Persist Security Info=True;User ID=sa" SettingsObjectName="MacGym_DB.Properties.Settings" SettingsPropertyName="MacGymConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.BodyParts" Member="BodyParts">
     <Type Name="BodyPart">
       <Column Name="bodyPartID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -32,14 +32,22 @@
       <Association Name="Workout_WorkoutBodyPart" Member="Workout" ThisKey="workoutID" OtherKey="workoutID" Type="Workout" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.WorkoutImages" Member="WorkoutImages">
+    <Type Name="WorkoutImage">
+      <Column Name="workoutImageID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="workoutID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="image" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Workout_WorkoutImage" Member="Workout" ThisKey="workoutID" OtherKey="workoutID" Type="Workout" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Workouts" Member="Workouts">
     <Type Name="Workout">
       <Column Name="workoutID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="shortDescription" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="longDescription" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Workout_WorkoutTool" Member="WorkoutTools" ThisKey="workoutID" OtherKey="workoutID" Type="WorkoutTool" />
       <Association Name="Workout_WorkoutBodyPart" Member="WorkoutBodyParts" ThisKey="workoutID" OtherKey="workoutID" Type="WorkoutBodyPart" />
+      <Association Name="Workout_WorkoutImage" Member="WorkoutImages" ThisKey="workoutID" OtherKey="workoutID" Type="WorkoutImage" />
     </Type>
   </Table>
 </Database>

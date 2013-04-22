@@ -26,38 +26,51 @@
         <elementListCompartment Id="a5b2d924-cd70-4848-af15-e9fae8b929fb" absoluteBounds="0.89000000000000012, 2.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="23ee2395-5ae1-4fa5-bb22-15326c38dbfc" absoluteBounds="3.875, 0.5, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/MacGymDataContext/Workout" />
-      <nestedChildShapes>
-        <elementListCompartment Id="fccc79e4-2485-433c-b37a-95896bc36f01" absoluteBounds="3.8899999999999997, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(8 : 4.875); (8 : 3.7612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.15625 : 4.875); (8.15625 : 3.7612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/MacGymDataContext/Tool/Tool_WorkoutTool" />
       <nodes>
         <classShapeMoniker Id="2580ca19-6b65-4d46-a13d-b45a6a8521e5" />
         <classShapeMoniker Id="ed328482-d3d4-4216-b25e-ecf8633716fd" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.875 : 4.875); (1.875 : 3.7612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.875 : 4.875); (1.875 : 3.7612939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/MacGymDataContext/BodyPart/BodyPart_WorkoutBodyPart" />
       <nodes>
         <classShapeMoniker Id="78b0790e-3b51-4451-bedb-c517a79a53cf" />
         <classShapeMoniker Id="03807f27-c58c-4853-9d22-ec848e6024d1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.875 : 1.28929768880208); (8 : 1.28929768880208); (8 : 2.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <classShape Id="b6492175-bccf-461d-8b8d-a737a65bd998" absoluteBounds="4.25, 3.125, 2, 1.3862939453125">
+      <DataClassMoniker Name="/MacGymDataContext/WorkoutImage" />
+      <nestedChildShapes>
+        <elementListCompartment Id="37e9e2a1-da6a-4510-995f-1e413a9d079e" absoluteBounds="4.265, 3.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7b8833c3-9433-4a05-aac5-cde16487b108" absoluteBounds="4.125, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/MacGymDataContext/Workout" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fcc4ded9-50cd-4605-9a2c-0379ceffe1c4" absoluteBounds="4.14, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.125 : 1.44314697265625); (8 : 1.44314697265625); (8 : 2.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/MacGymDataContext/Workout/Workout_WorkoutTool" />
       <nodes>
-        <classShapeMoniker Id="23ee2395-5ae1-4fa5-bb22-15326c38dbfc" />
+        <classShapeMoniker Id="7b8833c3-9433-4a05-aac5-cde16487b108" />
         <classShapeMoniker Id="ed328482-d3d4-4216-b25e-ecf8633716fd" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.875 : 1.28929768880208); (1.875 : 1.28929768880208); (1.875 : 2.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.125 : 1.44314697265625); (1.875 : 1.44314697265625); (1.875 : 2.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/MacGymDataContext/Workout/Workout_WorkoutBodyPart" />
       <nodes>
-        <classShapeMoniker Id="23ee2395-5ae1-4fa5-bb22-15326c38dbfc" />
+        <classShapeMoniker Id="7b8833c3-9433-4a05-aac5-cde16487b108" />
         <classShapeMoniker Id="03807f27-c58c-4853-9d22-ec848e6024d1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.1875 : 2.1362939453125); (5.1875 : 3.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MacGymDataContext/Workout/Workout_WorkoutImage" />
+      <nodes>
+        <classShapeMoniker Id="7b8833c3-9433-4a05-aac5-cde16487b108" />
+        <classShapeMoniker Id="b6492175-bccf-461d-8b8d-a737a65bd998" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
