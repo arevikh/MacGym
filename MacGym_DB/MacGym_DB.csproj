@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseRepository.cs" />
+    <Compile Include="BodyPartsRepository.cs" />
     <Compile Include="MacGym.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -51,6 +53,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ToolsRepository.cs" />
+    <Compile Include="WorkoutsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
