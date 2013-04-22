@@ -6,12 +6,21 @@ using System.Web.Mvc;
 
 namespace MacGym_WebRole.Controllers
 {
-    public class HomeController : Controller
+    public class WorkoutController : Controller
     {
         public ActionResult Index()
         {
             return View();
         }
 
+        public ActionResult Details()
+        {
+            return View();
+        }
+
+        public ActionResult List()
+        {
+            return View();
+        }
     }
 }
