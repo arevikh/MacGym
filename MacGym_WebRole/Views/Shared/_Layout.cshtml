@@ -16,11 +16,7 @@
     @Styles.Render("~/styles/less")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script type="text/javascript">
-        $(document).ready(function () {
-            alert('Hello from jQuery');
-        });
-    </script>
+    @RenderSection("scripts", required:false)
 </head>
 
 <body>

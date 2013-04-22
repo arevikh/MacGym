@@ -1,20 +1,56 @@
 ﻿@{
     ViewBag.Title = "Home";
 }
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTab').tab();
+
+            $('#myTab a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            })
+        });
+
+
+    </script>
+}
 <div class="row">
-    <div class="span4">
-        <h2>Heading</h2>
-        <p>Text</p>
-        <p><a class="btn" href="#">View details »</a></p>
+    <div class="span9">
+        
+        
+        
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a href="#home">Home</a></li>
+            <li><a href="#profile">Profile</a></li>
+            <li><a href="#messages">Messages</a></li>
+            <li><a href="#settings">Settings</a></li>
+        </ul>
+ 
+        <div class="tab-content">
+            <div class="tab-pane active" id="home">t</div>
+            <div class="tab-pane" id="profile">g</div>
+            <div class="tab-pane" id="messages">h</div>
+            <div class="tab-pane" id="settings">j</div>
+        </div>
+
+
+
     </div>
-    <div class="span4">
-        <h2>Heading</h2>
-        <p>Text</p>
-        <p><a class="btn" href="#">View details »</a></p>
-    </div>
-    <div class="span4">
-        <h2>Heading</h2>
-        <p>Text</p>
-        <p><a class="btn" href="#">View details »</a></p>
+    <div class="span3">
+        <h4>Last 10 viewed</h4>
+        <ul>
+            <li><a href="#">text 1</a></li>
+            <li><a href="#">text 2</a></li>
+            <li><a href="#">text 3</a></li>
+            <li><a href="#">text 4</a></li>
+            <li><a href="#">text 5</a></li>
+            <li><a href="#">text 6</a></li>
+            <li><a href="#">text 7</a></li>
+            <li><a href="#">text 8</a></li>
+            <li><a href="#">text 9</a></li>
+            <li><a href="#">text 10</a></li>
+        </ul>
     </div>
 </div>

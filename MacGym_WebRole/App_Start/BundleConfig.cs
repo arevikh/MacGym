@@ -14,7 +14,7 @@ namespace MacGym_WebRole
                         "~/lib/jquery-1.9.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                        "~/bootstrap.min.js").Include("~/bootstrap-tabs.js"));
+                        "~/lib/bootstrap.min.js").Include("~/lib/bootstrap-tabs.js"));
 
             var lessBundle = new Bundle("~/styles/less").IncludeDirectory("~/styles/less", "*.less");
             lessBundle.Transforms.Add(new LessTransform());
