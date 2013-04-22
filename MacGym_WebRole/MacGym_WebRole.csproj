@@ -151,6 +151,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\Images\Workouts\1.jpg" />
     <Content Include="Content\Images\Workouts\2.jpg" />
+    <Content Include="Content\Images\Workouts\3.jpg" />
+    <Content Include="Content\Images\Workouts\4.jpg" />
     <Content Include="Global.asax" />
     <Content Include="lib\bootstrap-tabs.js" />
     <Content Include="lib\bootstrap.min.js" />
