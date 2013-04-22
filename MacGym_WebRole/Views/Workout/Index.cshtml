@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IndexModel
+@{
     ViewBag.Title = "Home";
 }
 @section scripts
@@ -27,15 +28,18 @@
         <div class="tab-content">
             <div class="tab-pane active" id="body">
                 <ul>
-                    <li><a href="#">hands</a></li>
-                    <li><a href="#">legs</a></li>
-                    <li><a href="#">neck</a></li>
+                    @foreach (var item in Model.BodyParts)
+                    {
+                        <li>@(Html.ActionLink(item.name, "List", new { bodyPart = item.bodyPartID }))</li>
+                    }
                 </ul>
             </div>
             <div class="tab-pane" id="tools">
                 <ul>
-                    <li><a href="#">rope</a></li>
-                    <li><a href="#">dumbbell</a></li>
+                    @foreach (var item in Model.Tools)
+                    {
+                        <li>@(Html.ActionLink(item.name, "List", new { tool = item.toolID }))</li>
+                    }
                 </ul>
             </div>
         </div>
