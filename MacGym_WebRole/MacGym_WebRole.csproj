@@ -150,6 +150,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\Images\body.png" />
     <Content Include="Content\Images\Workouts\1.jpg" />
     <Content Include="Content\Images\Workouts\2.jpg" />
     <Content Include="Content\Images\Workouts\3.jpg" />
