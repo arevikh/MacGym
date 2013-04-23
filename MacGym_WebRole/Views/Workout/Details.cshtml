@@ -53,16 +53,16 @@
 <div class="row">
     <div class="span6">
         <h4 class="detail-title">Tools</h4>
-        @foreach (var item in Model.BodyParts)
-        {
-            <p>@(Html.ActionLink(item.name, "List", new { bodyPart = item.bodyPartID }))</p>
-        }
-    </div>
-    <div class="span6">
-        <h4 class="detail-title">Parts of Body</h4>
         @foreach (var item in Model.Tools)
         {
             <p>@(Html.ActionLink(item.name, "List", new { tool = item.toolID }))</p>
         }
+    </div>
+    <div class="span6">
+        <h4 class="detail-title">Parts of Body</h4>
+        @foreach (var item in Model.BodyParts)
+        {
+            <p>@(Html.ActionLink(item.name, "List", new { bodyPart = item.bodyPartID }))</p>
+        }        
     </div>
 </div>
