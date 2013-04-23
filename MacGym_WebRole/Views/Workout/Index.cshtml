@@ -40,12 +40,12 @@
                     <img src="~/images/body.png" usemap="#planetmap" class="text-center">
 
                     <map name="planetmap">
-                        <area shape="rect" coords="115,40,145,70" href="aaaaaaaa.htm" title="Neck" alt="Neck">
-                        <area shape="rect" coords="80,80,175,65" href="aaaaaaaa.htm" title="Back" alt="Back">
-                        <area shape="rect" coords="0,230,85,85" href="aaaaaaaa.htm" title="Arm" alt="Arm">
-                        <area shape="rect" coords="250,230,175,85" href="aaaaaaaa.htm" title="Arm" alt="Arm">
-                        <area shape="rect" coords="160,180,95,120" href="aaaaaaaa.htm" title="Belly" alt="Belly">
-                        <area shape="rect" coords="170,180,85,290" href="aaaaaaaa.htm" title="Thigh" alt="Thigh">
+                        <area shape="rect" coords="115,40,145,70" href="@Url.Action("List", new { bodyPart = 2 })" title="Neck" alt="Neck">
+                        <area shape="rect" coords="80,80,175,65" href="@Url.Action("List", new { bodyPart = 1 })" title="Back" alt="Back">
+                        <area shape="rect" coords="0,230,85,85" href="@Url.Action("List", new { bodyPart = 3 })" title="Arm" alt="Arm">
+                        <area shape="rect" coords="250,230,175,85" href="@Url.Action("List", new { bodyPart = 3 })" title="Arm" alt="Arm">
+                        <area shape="rect" coords="160,180,95,120" href="@Url.Action("List", new { bodyPart = 4 })" title="Belly" alt="Belly">
+                        <area shape="rect" coords="170,180,85,290" href="@Url.Action("List", new { bodyPart = 5 })" title="Thigh" alt="Thigh">
                     </map> 
                 </div>
                
