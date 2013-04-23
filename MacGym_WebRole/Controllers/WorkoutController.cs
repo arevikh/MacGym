@@ -15,11 +15,14 @@ namespace MacGym_WebRole.Controllers
             IndexModel model = new IndexModel();
             model.Tools = new ToolsRepository().Get();
             model.BodyParts = new BodyPartsRepository().Get();
+            model.LastViewed = new WorkoutsRepository().GetLastViewed(10);
             return View(model);
         }
 
         public ActionResult Details(int id)
         {
+            new WorkoutsRepository().AddView(id);
+
             WorkoutModel model = new WorkoutModel(new WorkoutsRepository().Get(id));
             model.BodyParts = new BodyPartsRepository().GetByWorkout(id);
             model.Tools = new ToolsRepository().GetByWorkout(id);

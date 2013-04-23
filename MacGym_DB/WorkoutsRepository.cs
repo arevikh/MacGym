@@ -64,5 +64,23 @@ namespace MacGym_DB
 
             return query.ToList();
         }
+
+        public void AddView(int workoutID)
+        {
+            WorkoutView view = new WorkoutView();
+            view.workoutID = workoutID;
+            view.viewDate = DateTime.Now;
+            DB.WorkoutViews.InsertOnSubmit(view);
+            SubmitChanges();
+        }
+
+        public List<Workout> GetLastViewed(int viewedCount)
+        {
+            var query = from v in DB.WorkoutViews
+                        orderby v.viewDate descending
+                        select v.Workout;
+
+            return query.Take(viewedCount).ToList();
+        }
     }
 }

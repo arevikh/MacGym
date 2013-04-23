@@ -61,19 +61,16 @@
         </div>
 
     </div>
-    <div class="span3">
-        <h4>Last 10 viewed</h4>
-        <ul>
-            <li><a href="#">text 1</a></li>
-            <li><a href="#">text 2</a></li>
-            <li><a href="#">text 3</a></li>
-            <li><a href="#">text 4</a></li>
-            <li><a href="#">text 5</a></li>
-            <li><a href="#">text 6</a></li>
-            <li><a href="#">text 7</a></li>
-            <li><a href="#">text 8</a></li>
-            <li><a href="#">text 9</a></li>
-            <li><a href="#">text 10</a></li>
-        </ul>
-    </div>
+    @if(Model.LastViewed.Count > 0)
+    {
+        <div class="span3">
+            <h4>Last @(Model.LastViewed.Count) viewed</h4>
+            <ul>
+                @foreach (var item in Model.LastViewed)
+                {
+                    <li>@Html.ActionLink(item.name, "Details", new { id = item.workoutID })</li>    
+                }
+            </ul>
+        </div>
+    }
 </div>

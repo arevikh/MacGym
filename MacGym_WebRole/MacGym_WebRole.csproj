@@ -150,12 +150,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Content\Images\body.png" />
+    <Content Include="Content\Images\Tools\1.jpg" />
     <Content Include="Content\Images\Workouts\1.jpg" />
     <Content Include="Content\Images\Workouts\2.jpg" />
     <Content Include="Content\Images\Workouts\3.jpg" />
     <Content Include="Content\Images\Workouts\4.jpg" />
     <Content Include="Global.asax" />
+    <Content Include="images\body.png" />
     <Content Include="images\close.png" />
     <Content Include="images\loading.gif" />
     <Content Include="images\next.png" />
@@ -178,7 +179,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\Tools\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

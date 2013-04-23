@@ -42,15 +42,18 @@ namespace MacGym_DB
     partial void InsertWorkoutImage(WorkoutImage instance);
     partial void UpdateWorkoutImage(WorkoutImage instance);
     partial void DeleteWorkoutImage(WorkoutImage instance);
-    partial void InsertWorkout(Workout instance);
-    partial void UpdateWorkout(Workout instance);
-    partial void DeleteWorkout(Workout instance);
     partial void InsertTool(Tool instance);
     partial void UpdateTool(Tool instance);
     partial void DeleteTool(Tool instance);
     partial void InsertToolImage(ToolImage instance);
     partial void UpdateToolImage(ToolImage instance);
     partial void DeleteToolImage(ToolImage instance);
+    partial void InsertWorkout(Workout instance);
+    partial void UpdateWorkout(Workout instance);
+    partial void DeleteWorkout(Workout instance);
+    partial void InsertWorkoutView(WorkoutView instance);
+    partial void UpdateWorkoutView(WorkoutView instance);
+    partial void DeleteWorkoutView(WorkoutView instance);
     #endregion
 		
 		public MacGymDataContext() : 
@@ -115,14 +118,6 @@ namespace MacGym_DB
 			}
 		}
 		
-		public System.Data.Linq.Table<Workout> Workouts
-		{
-			get
-			{
-				return this.GetTable<Workout>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Tool> Tools
 		{
 			get
@@ -136,6 +131,22 @@ namespace MacGym_DB
 			get
 			{
 				return this.GetTable<ToolImage>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Workout> Workouts
+		{
+			get
+			{
+				return this.GetTable<Workout>();
+			}
+		}
+		
+		public System.Data.Linq.Table<WorkoutView> WorkoutViews
+		{
+			get
+			{
+				return this.GetTable<WorkoutView>();
 			}
 		}
 	}
@@ -266,9 +277,9 @@ namespace MacGym_DB
 		
 		private int _toolID;
 		
-		private EntityRef<Workout> _Workout;
-		
 		private EntityRef<Tool> _Tool;
+		
+		private EntityRef<Workout> _Workout;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -284,8 +295,8 @@ namespace MacGym_DB
 		
 		public WorkoutTool()
 		{
-			this._Workout = default(EntityRef<Workout>);
 			this._Tool = default(EntityRef<Tool>);
+			this._Workout = default(EntityRef<Workout>);
 			OnCreated();
 		}
 		
@@ -357,40 +368,6 @@ namespace MacGym_DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Workout_WorkoutTool", Storage="_Workout", ThisKey="workoutID", OtherKey="workoutID", IsForeignKey=true)]
-		public Workout Workout
-		{
-			get
-			{
-				return this._Workout.Entity;
-			}
-			set
-			{
-				Workout previousValue = this._Workout.Entity;
-				if (((previousValue != value) 
-							|| (this._Workout.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Workout.Entity = null;
-						previousValue.WorkoutTools.Remove(this);
-					}
-					this._Workout.Entity = value;
-					if ((value != null))
-					{
-						value.WorkoutTools.Add(this);
-						this._workoutID = value.workoutID;
-					}
-					else
-					{
-						this._workoutID = default(int);
-					}
-					this.SendPropertyChanged("Workout");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tool_WorkoutTool", Storage="_Tool", ThisKey="toolID", OtherKey="toolID", IsForeignKey=true)]
 		public Tool Tool
 		{
@@ -421,6 +398,40 @@ namespace MacGym_DB
 						this._toolID = default(int);
 					}
 					this.SendPropertyChanged("Tool");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Workout_WorkoutTool", Storage="_Workout", ThisKey="workoutID", OtherKey="workoutID", IsForeignKey=true)]
+		public Workout Workout
+		{
+			get
+			{
+				return this._Workout.Entity;
+			}
+			set
+			{
+				Workout previousValue = this._Workout.Entity;
+				if (((previousValue != value) 
+							|| (this._Workout.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Workout.Entity = null;
+						previousValue.WorkoutTools.Remove(this);
+					}
+					this._Workout.Entity = value;
+					if ((value != null))
+					{
+						value.WorkoutTools.Add(this);
+						this._workoutID = value.workoutID;
+					}
+					else
+					{
+						this._workoutID = default(int);
+					}
+					this.SendPropertyChanged("Workout");
 				}
 			}
 		}
@@ -789,200 +800,6 @@ namespace MacGym_DB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Workouts")]
-	public partial class Workout : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _workoutID;
-		
-		private string _name;
-		
-		private string _description;
-		
-		private EntitySet<WorkoutTool> _WorkoutTools;
-		
-		private EntitySet<WorkoutBodyPart> _WorkoutBodyParts;
-		
-		private EntitySet<WorkoutImage> _WorkoutImages;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnworkoutIDChanging(int value);
-    partial void OnworkoutIDChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OndescriptionChanging(string value);
-    partial void OndescriptionChanged();
-    #endregion
-		
-		public Workout()
-		{
-			this._WorkoutTools = new EntitySet<WorkoutTool>(new Action<WorkoutTool>(this.attach_WorkoutTools), new Action<WorkoutTool>(this.detach_WorkoutTools));
-			this._WorkoutBodyParts = new EntitySet<WorkoutBodyPart>(new Action<WorkoutBodyPart>(this.attach_WorkoutBodyParts), new Action<WorkoutBodyPart>(this.detach_WorkoutBodyParts));
-			this._WorkoutImages = new EntitySet<WorkoutImage>(new Action<WorkoutImage>(this.attach_WorkoutImages), new Action<WorkoutImage>(this.detach_WorkoutImages));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_workoutID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int workoutID
-		{
-			get
-			{
-				return this._workoutID;
-			}
-			set
-			{
-				if ((this._workoutID != value))
-				{
-					this.OnworkoutIDChanging(value);
-					this.SendPropertyChanging();
-					this._workoutID = value;
-					this.SendPropertyChanged("workoutID");
-					this.OnworkoutIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string description
-		{
-			get
-			{
-				return this._description;
-			}
-			set
-			{
-				if ((this._description != value))
-				{
-					this.OndescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._description = value;
-					this.SendPropertyChanged("description");
-					this.OndescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Workout_WorkoutTool", Storage="_WorkoutTools", ThisKey="workoutID", OtherKey="workoutID")]
-		public EntitySet<WorkoutTool> WorkoutTools
-		{
-			get
-			{
-				return this._WorkoutTools;
-			}
-			set
-			{
-				this._WorkoutTools.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Workout_WorkoutBodyPart", Storage="_WorkoutBodyParts", ThisKey="workoutID", OtherKey="workoutID")]
-		public EntitySet<WorkoutBodyPart> WorkoutBodyParts
-		{
-			get
-			{
-				return this._WorkoutBodyParts;
-			}
-			set
-			{
-				this._WorkoutBodyParts.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Workout_WorkoutImage", Storage="_WorkoutImages", ThisKey="workoutID", OtherKey="workoutID")]
-		public EntitySet<WorkoutImage> WorkoutImages
-		{
-			get
-			{
-				return this._WorkoutImages;
-			}
-			set
-			{
-				this._WorkoutImages.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_WorkoutTools(WorkoutTool entity)
-		{
-			this.SendPropertyChanging();
-			entity.Workout = this;
-		}
-		
-		private void detach_WorkoutTools(WorkoutTool entity)
-		{
-			this.SendPropertyChanging();
-			entity.Workout = null;
-		}
-		
-		private void attach_WorkoutBodyParts(WorkoutBodyPart entity)
-		{
-			this.SendPropertyChanging();
-			entity.Workout = this;
-		}
-		
-		private void detach_WorkoutBodyParts(WorkoutBodyPart entity)
-		{
-			this.SendPropertyChanging();
-			entity.Workout = null;
-		}
-		
-		private void attach_WorkoutImages(WorkoutImage entity)
-		{
-			this.SendPropertyChanging();
-			entity.Workout = this;
-		}
-		
-		private void detach_WorkoutImages(WorkoutImage entity)
-		{
-			this.SendPropertyChanging();
-			entity.Workout = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tools")]
 	public partial class Tool : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1251,6 +1068,379 @@ namespace MacGym_DB
 						this._toolID = default(int);
 					}
 					this.SendPropertyChanged("Tool");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Workouts")]
+	public partial class Workout : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _workoutID;
+		
+		private string _name;
+		
+		private string _description;
+		
+		private EntitySet<WorkoutTool> _WorkoutTools;
+		
+		private EntitySet<WorkoutBodyPart> _WorkoutBodyParts;
+		
+		private EntitySet<WorkoutImage> _WorkoutImages;
+		
+		private EntitySet<WorkoutView> _WorkoutViews;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnworkoutIDChanging(int value);
+    partial void OnworkoutIDChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    #endregion
+		
+		public Workout()
+		{
+			this._WorkoutTools = new EntitySet<WorkoutTool>(new Action<WorkoutTool>(this.attach_WorkoutTools), new Action<WorkoutTool>(this.detach_WorkoutTools));
+			this._WorkoutBodyParts = new EntitySet<WorkoutBodyPart>(new Action<WorkoutBodyPart>(this.attach_WorkoutBodyParts), new Action<WorkoutBodyPart>(this.detach_WorkoutBodyParts));
+			this._WorkoutImages = new EntitySet<WorkoutImage>(new Action<WorkoutImage>(this.attach_WorkoutImages), new Action<WorkoutImage>(this.detach_WorkoutImages));
+			this._WorkoutViews = new EntitySet<WorkoutView>(new Action<WorkoutView>(this.attach_WorkoutViews), new Action<WorkoutView>(this.detach_WorkoutViews));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_workoutID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int workoutID
+		{
+			get
+			{
+				return this._workoutID;
+			}
+			set
+			{
+				if ((this._workoutID != value))
+				{
+					this.OnworkoutIDChanging(value);
+					this.SendPropertyChanging();
+					this._workoutID = value;
+					this.SendPropertyChanged("workoutID");
+					this.OnworkoutIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this.OndescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Workout_WorkoutTool", Storage="_WorkoutTools", ThisKey="workoutID", OtherKey="workoutID")]
+		public EntitySet<WorkoutTool> WorkoutTools
+		{
+			get
+			{
+				return this._WorkoutTools;
+			}
+			set
+			{
+				this._WorkoutTools.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Workout_WorkoutBodyPart", Storage="_WorkoutBodyParts", ThisKey="workoutID", OtherKey="workoutID")]
+		public EntitySet<WorkoutBodyPart> WorkoutBodyParts
+		{
+			get
+			{
+				return this._WorkoutBodyParts;
+			}
+			set
+			{
+				this._WorkoutBodyParts.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Workout_WorkoutImage", Storage="_WorkoutImages", ThisKey="workoutID", OtherKey="workoutID")]
+		public EntitySet<WorkoutImage> WorkoutImages
+		{
+			get
+			{
+				return this._WorkoutImages;
+			}
+			set
+			{
+				this._WorkoutImages.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Workout_WorkoutView", Storage="_WorkoutViews", ThisKey="workoutID", OtherKey="workoutID")]
+		public EntitySet<WorkoutView> WorkoutViews
+		{
+			get
+			{
+				return this._WorkoutViews;
+			}
+			set
+			{
+				this._WorkoutViews.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_WorkoutTools(WorkoutTool entity)
+		{
+			this.SendPropertyChanging();
+			entity.Workout = this;
+		}
+		
+		private void detach_WorkoutTools(WorkoutTool entity)
+		{
+			this.SendPropertyChanging();
+			entity.Workout = null;
+		}
+		
+		private void attach_WorkoutBodyParts(WorkoutBodyPart entity)
+		{
+			this.SendPropertyChanging();
+			entity.Workout = this;
+		}
+		
+		private void detach_WorkoutBodyParts(WorkoutBodyPart entity)
+		{
+			this.SendPropertyChanging();
+			entity.Workout = null;
+		}
+		
+		private void attach_WorkoutImages(WorkoutImage entity)
+		{
+			this.SendPropertyChanging();
+			entity.Workout = this;
+		}
+		
+		private void detach_WorkoutImages(WorkoutImage entity)
+		{
+			this.SendPropertyChanging();
+			entity.Workout = null;
+		}
+		
+		private void attach_WorkoutViews(WorkoutView entity)
+		{
+			this.SendPropertyChanging();
+			entity.Workout = this;
+		}
+		
+		private void detach_WorkoutViews(WorkoutView entity)
+		{
+			this.SendPropertyChanging();
+			entity.Workout = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WorkoutViews")]
+	public partial class WorkoutView : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _workoutViewID;
+		
+		private int _workoutID;
+		
+		private System.DateTime _viewDate;
+		
+		private EntityRef<Workout> _Workout;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnworkoutViewIDChanging(int value);
+    partial void OnworkoutViewIDChanged();
+    partial void OnworkoutIDChanging(int value);
+    partial void OnworkoutIDChanged();
+    partial void OnviewDateChanging(System.DateTime value);
+    partial void OnviewDateChanged();
+    #endregion
+		
+		public WorkoutView()
+		{
+			this._Workout = default(EntityRef<Workout>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_workoutViewID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int workoutViewID
+		{
+			get
+			{
+				return this._workoutViewID;
+			}
+			set
+			{
+				if ((this._workoutViewID != value))
+				{
+					this.OnworkoutViewIDChanging(value);
+					this.SendPropertyChanging();
+					this._workoutViewID = value;
+					this.SendPropertyChanged("workoutViewID");
+					this.OnworkoutViewIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_workoutID", DbType="Int NOT NULL")]
+		public int workoutID
+		{
+			get
+			{
+				return this._workoutID;
+			}
+			set
+			{
+				if ((this._workoutID != value))
+				{
+					if (this._Workout.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnworkoutIDChanging(value);
+					this.SendPropertyChanging();
+					this._workoutID = value;
+					this.SendPropertyChanged("workoutID");
+					this.OnworkoutIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_viewDate", DbType="DateTime NOT NULL")]
+		public System.DateTime viewDate
+		{
+			get
+			{
+				return this._viewDate;
+			}
+			set
+			{
+				if ((this._viewDate != value))
+				{
+					this.OnviewDateChanging(value);
+					this.SendPropertyChanging();
+					this._viewDate = value;
+					this.SendPropertyChanged("viewDate");
+					this.OnviewDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Workout_WorkoutView", Storage="_Workout", ThisKey="workoutID", OtherKey="workoutID", IsForeignKey=true)]
+		public Workout Workout
+		{
+			get
+			{
+				return this._Workout.Entity;
+			}
+			set
+			{
+				Workout previousValue = this._Workout.Entity;
+				if (((previousValue != value) 
+							|| (this._Workout.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Workout.Entity = null;
+						previousValue.WorkoutViews.Remove(this);
+					}
+					this._Workout.Entity = value;
+					if ((value != null))
+					{
+						value.WorkoutViews.Add(this);
+						this._workoutID = value.workoutID;
+					}
+					else
+					{
+						this._workoutID = default(int);
+					}
+					this.SendPropertyChanged("Workout");
 				}
 			}
 		}

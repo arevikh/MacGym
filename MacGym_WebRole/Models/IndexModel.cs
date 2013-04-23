@@ -10,5 +10,6 @@ namespace MacGym_WebRole.Models
     {
         public List<Tool> Tools { get; set; }
         public List<BodyPart> BodyParts { get; set; }
+        public List<Workout> LastViewed { get; set; }
     }
 }
