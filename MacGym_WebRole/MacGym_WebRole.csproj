@@ -142,6 +142,7 @@
     </Compile>
     <Compile Include="Models\ListModel.cs" />
     <Compile Include="Models\IndexModel.cs" />
+    <Compile Include="Models\ToolModel.cs" />
     <Compile Include="Models\WorkoutModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebRole.cs" />

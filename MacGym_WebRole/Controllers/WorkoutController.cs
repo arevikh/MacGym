@@ -13,7 +13,7 @@ namespace MacGym_WebRole.Controllers
         public ActionResult Index()
         {
             IndexModel model = new IndexModel();
-            model.Tools = new ToolsRepository().Get();
+            model.Tools = new ToolsRepository().Get().Select(t => new ToolModel(t)).ToList();
             model.BodyParts = new BodyPartsRepository().Get();
             model.LastViewed = new WorkoutsRepository().GetLastViewed(10);
             return View(model);

@@ -28,33 +28,41 @@
  
         <div class="tab-content">
             <div class="tab-pane active" id="body">
-                <ul>
-                    @foreach (var item in Model.BodyParts)
-                    {
-                        <li>@(Html.ActionLink(item.name, "List", new { bodyPart = item.bodyPartID }))</li>
-                    }
-                </ul>
-                <img src="~/images/body.png" usemap="#planetmap">
+                <div class="span3">
+                    <ul>
+                        @foreach (var item in Model.BodyParts)
+                        {
+                            <li>@(Html.ActionLink(item.name, "List", new { bodyPart = item.bodyPartID }))</li>
+                        }
+                    </ul>
+                </div>
+                <div class="span4">
+                    <img src="~/images/body.png" usemap="#planetmap" class="text-center">
 
-
-                <map name="planetmap">
-                    <area shape="rect" coords="115,40,145,70" href="aaaaaaaa.htm" title="Neck" alt="Neck">
-                    <area shape="rect" coords="80,80,175,65" href="aaaaaaaa.htm" title="Back" alt="Back">
-                    <area shape="rect" coords="0,230,85,85" href="aaaaaaaa.htm" title="Arm" alt="Arm">
-                    <area shape="rect" coords="250,230,175,85" href="aaaaaaaa.htm" title="Arm" alt="Arm">
-                    <area shape="rect" coords="160,180,95,120" href="aaaaaaaa.htm" title="Belly" alt="Belly">
-                    <area shape="rect" coords="170,180,85,290" href="aaaaaaaa.htm" title="Thigh" alt="Thigh">
-
-                    
-                </map> 
-
-
+                    <map name="planetmap">
+                        <area shape="rect" coords="115,40,145,70" href="aaaaaaaa.htm" title="Neck" alt="Neck">
+                        <area shape="rect" coords="80,80,175,65" href="aaaaaaaa.htm" title="Back" alt="Back">
+                        <area shape="rect" coords="0,230,85,85" href="aaaaaaaa.htm" title="Arm" alt="Arm">
+                        <area shape="rect" coords="250,230,175,85" href="aaaaaaaa.htm" title="Arm" alt="Arm">
+                        <area shape="rect" coords="160,180,95,120" href="aaaaaaaa.htm" title="Belly" alt="Belly">
+                        <area shape="rect" coords="170,180,85,290" href="aaaaaaaa.htm" title="Thigh" alt="Thigh">
+                    </map> 
+                </div>
+               
             </div>
             <div class="tab-pane" id="tools">
                 <ul>
                     @foreach (var item in Model.Tools)
                     {
-                        <li>@(Html.ActionLink(item.name, "List", new { tool = item.toolID }))</li>
+                        <li class="tool-thumb">
+                            @if(item.HasImage)
+                            {
+                                <a href="@Url.Action("List", new { tool = item.ToolID })">
+                                    <img src="~/Content/Images/Tools/@(item.FirstImage)" />
+                                </a>
+                            }
+                            @(Html.ActionLink(item.Name, "List", new { tool = item.ToolID }))
+                        </li>
                     }
                 </ul>
             </div>

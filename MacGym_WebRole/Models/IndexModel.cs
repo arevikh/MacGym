@@ -8,7 +8,7 @@ namespace MacGym_WebRole.Models
 {
     public class IndexModel
     {
-        public List<Tool> Tools { get; set; }
+        public List<ToolModel> Tools { get; set; }
         public List<BodyPart> BodyParts { get; set; }
         public List<Workout> LastViewed { get; set; }
     }
