@@ -77,5 +77,8 @@ namespace MacGym_WebRole.Models
                 return _workout.name;
             }
         }
+
+        public List<BodyPart> BodyParts { get; set; }
+        public List<Tool> Tools { get; set; }
     }
 }

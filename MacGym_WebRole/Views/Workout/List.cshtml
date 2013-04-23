@@ -13,12 +13,14 @@
         <div class="span2">
             @if(item.HasImage)
             {
-                <img src="~/Content/Images/Workouts/@(item.FirstImage)">
+                <a href="@Url.Action("Details", new { id = item.WorkoutID })">
+                    <img src="~/Content/Images/Workouts/@(item.FirstImage)">
+                </a>
             }
         </div>
         <div class="span10">
             <p>@(item.Description)</p>
-            <p>@(Html.ActionLink("Details", "Details", new { id = item.WorkoutID}))</p>
+            <p>@(Html.ActionLink("Details", "Details", new { id = item.WorkoutID }))</p>
         </div>
     </div>    
 }

@@ -29,5 +29,10 @@ namespace MacGym_DB
         {
             return DB.BodyParts.ToList();
         }
+
+        public List<BodyPart> GetByWorkout(int workoutID)
+        {
+            return DB.BodyParts.Where(b => b.WorkoutBodyParts.Count(w => w.workoutID == workoutID) > 0).ToList();
+        }
     }
 }

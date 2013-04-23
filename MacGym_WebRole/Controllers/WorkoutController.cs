@@ -21,6 +21,8 @@ namespace MacGym_WebRole.Controllers
         public ActionResult Details(int id)
         {
             WorkoutModel model = new WorkoutModel(new WorkoutsRepository().Get(id));
+            model.BodyParts = new BodyPartsRepository().GetByWorkout(id);
+            model.Tools = new ToolsRepository().GetByWorkout(id);
             return View(model);
         }
 
