@@ -14,6 +14,12 @@ namespace MacGym_WebRole
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Workout",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Workout", action = "Details" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}",
                 defaults: new { controller = "Workout", action = "Index" }

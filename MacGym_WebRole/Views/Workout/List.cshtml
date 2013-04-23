@@ -3,7 +3,7 @@
     ViewBag.Title = "List";
 }
 
-<h2>List of Exercises - Balls</h2>
+<h2>List of Exercises</h2>
 
 @foreach (var item in Model.Workouts)
 {
@@ -11,14 +11,14 @@
     
     <div class="row">
         <div class="span2">
-            @if(!string.IsNullOrWhiteSpace(item.FirstImage))
+            @if(item.HasImage)
             {
                 <img src="~/Content/Images/Workouts/@(item.FirstImage)">
             }
         </div>
         <div class="span10">
             <p>@(item.Description)</p>
-            <p>@(Html.ActionLink("Details", "Details", new { workout = item.WorkoutID}))</p>
+            <p>@(Html.ActionLink("Details", "Details", new { id = item.WorkoutID}))</p>
         </div>
     </div>    
 }

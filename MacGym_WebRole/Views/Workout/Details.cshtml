@@ -1,58 +1,48 @@
-﻿@{
+﻿@model WorkoutModel
+@{
     ViewBag.Title = "Details";
 }
 
-<h2>Details - An Exact Excercise with Ball</h2>
+<h2>@Model.Name</h2>
 
 <hr>
 
-<h4 class="detail-title">Photos</h4>
-<div class="row">
-    <div class="span2 gallery-img">
-        <img src="http://www.jefit.com/images/exercises/800_600/2404.jpg" class="thumb">
+@if(Model.HasImage)
+{
+    <h4 class="detail-title">Photos</h4>
+    <div class="row">
+        @foreach (var item in Model.Images)
+        {
+            <div class="span2 gallery-img">
+                <img src="~/Content/Images/Workouts/@(item)" class="thumb">
+            </div>
+        }
     </div>
-    <div class="span2 gallery-img">
-        <img src="http://www.jefit.com/images/exercises/800_600/2404.jpg" class="thumb">
-    </div>
-    <div class="span2 gallery-img">
-        <img src="http://www.jefit.com/images/exercises/800_600/2404.jpg" class="thumb">
-    </div>
-    <div class="span2 gallery-img">
-        <img src="http://www.jefit.com/images/exercises/800_600/2404.jpg" class="thumb">
-    </div>
-    <div class="span2 gallery-img">
-        <img src="http://www.jefit.com/images/exercises/800_600/2404.jpg" class="thumb">
-    </div>
-    <div class="span2 gallery-img">
-        <img src="http://www.jefit.com/images/exercises/800_600/2404.jpg" class="thumb">
-    </div>
-    <div class="span2 gallery-img">
-        <img src="http://www.jefit.com/images/exercises/800_600/2404.jpg" class="thumb">
-    </div>
-    <div class="span2 gallery-img">
-        <img src="http://www.jefit.com/images/exercises/800_600/2404.jpg" class="thumb">
-    </div>
-</div>
+}
 
-<h4 class="detail-title">Videos</h4>
-<div class="row">
-    <div class="span2">
-        <iframe width="300" height="225" src="http://www.youtube.com/embed/QtYgmDEddug" frameborder="0" allowfullscreen></iframe>
+@if(Model.HasVideo)
+{
+    <h4 class="detail-title">Videos</h4>
+    <div class="row">
+        <div class="span2">
+            <iframe width="300" height="225" src="http://www.youtube.com/embed/QtYgmDEddug" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
-</div>
+}
 
-<h4 class="detail-title">Audio Recordings</h4>
-<div class="row">
-    <div class="span2">
-        Not available
+@if(Model.HasAudio)
+{
+    <h4 class="detail-title">Audio Recordings</h4>
+    <div class="row">
+        <div class="span2">
+            Not available
+        </div>
     </div>
-</div>
+}
 
 <h4 class="detail-title">Description</h4>
 <div class="row">
     <div class="span12">
-        <p>1.) Start off by lying down with your chest on top of an exercise ball in a plank position with your arms extended back behind your body.</p>
-        <p>2.) Arch your back towards the ceiling and hold position for a few seconds then return to the start position.</p>
-        <p>3.) Repeat for as many reps and sets as possible.</p>
+        @Model.Description
     </div>
 </div>

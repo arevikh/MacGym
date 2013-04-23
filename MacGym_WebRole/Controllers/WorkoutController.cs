@@ -18,9 +18,10 @@ namespace MacGym_WebRole.Controllers
             return View(model);
         }
 
-        public ActionResult Details()
+        public ActionResult Details(int id)
         {
-            return View();
+            WorkoutModel model = new WorkoutModel(new WorkoutsRepository().Get(id));
+            return View(model);
         }
 
         public ActionResult List(int? tool, int? bodyPart)

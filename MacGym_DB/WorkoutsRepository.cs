@@ -35,5 +35,10 @@ namespace MacGym_DB
             return DB.Workouts.Where(w => (toolID == 0 || w.WorkoutTools.Count(t => t.toolID == toolID) > 0) &&
                                           (bodyPartID == 0 || w.WorkoutBodyParts.Count(b => b.bodyPartID == bodyPartID) > 0)).ToList();
         }
+
+        public Workout Get(int workoutID)
+        {
+            return DB.Workouts.FirstOrDefault(w => w.workoutID == workoutID);
+        }
     }
 }
