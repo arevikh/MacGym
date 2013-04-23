@@ -36,9 +36,6 @@ namespace MacGym_DB
     partial void InsertWorkoutTool(WorkoutTool instance);
     partial void UpdateWorkoutTool(WorkoutTool instance);
     partial void DeleteWorkoutTool(WorkoutTool instance);
-    partial void InsertTool(Tool instance);
-    partial void UpdateTool(Tool instance);
-    partial void DeleteTool(Tool instance);
     partial void InsertWorkoutBodyPart(WorkoutBodyPart instance);
     partial void UpdateWorkoutBodyPart(WorkoutBodyPart instance);
     partial void DeleteWorkoutBodyPart(WorkoutBodyPart instance);
@@ -48,6 +45,12 @@ namespace MacGym_DB
     partial void InsertWorkout(Workout instance);
     partial void UpdateWorkout(Workout instance);
     partial void DeleteWorkout(Workout instance);
+    partial void InsertTool(Tool instance);
+    partial void UpdateTool(Tool instance);
+    partial void DeleteTool(Tool instance);
+    partial void InsertToolImage(ToolImage instance);
+    partial void UpdateToolImage(ToolImage instance);
+    partial void DeleteToolImage(ToolImage instance);
     #endregion
 		
 		public MacGymDataContext() : 
@@ -96,14 +99,6 @@ namespace MacGym_DB
 			}
 		}
 		
-		public System.Data.Linq.Table<Tool> Tools
-		{
-			get
-			{
-				return this.GetTable<Tool>();
-			}
-		}
-		
 		public System.Data.Linq.Table<WorkoutBodyPart> WorkoutBodyParts
 		{
 			get
@@ -125,6 +120,22 @@ namespace MacGym_DB
 			get
 			{
 				return this.GetTable<Workout>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Tool> Tools
+		{
+			get
+			{
+				return this.GetTable<Tool>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ToolImage> ToolImages
+		{
+			get
+			{
+				return this.GetTable<ToolImage>();
 			}
 		}
 	}
@@ -255,9 +266,9 @@ namespace MacGym_DB
 		
 		private int _toolID;
 		
-		private EntityRef<Tool> _Tool;
-		
 		private EntityRef<Workout> _Workout;
+		
+		private EntityRef<Tool> _Tool;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -273,8 +284,8 @@ namespace MacGym_DB
 		
 		public WorkoutTool()
 		{
-			this._Tool = default(EntityRef<Tool>);
 			this._Workout = default(EntityRef<Workout>);
+			this._Tool = default(EntityRef<Tool>);
 			OnCreated();
 		}
 		
@@ -346,40 +357,6 @@ namespace MacGym_DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tool_WorkoutTool", Storage="_Tool", ThisKey="toolID", OtherKey="toolID", IsForeignKey=true)]
-		public Tool Tool
-		{
-			get
-			{
-				return this._Tool.Entity;
-			}
-			set
-			{
-				Tool previousValue = this._Tool.Entity;
-				if (((previousValue != value) 
-							|| (this._Tool.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Tool.Entity = null;
-						previousValue.WorkoutTools.Remove(this);
-					}
-					this._Tool.Entity = value;
-					if ((value != null))
-					{
-						value.WorkoutTools.Add(this);
-						this._toolID = value.toolID;
-					}
-					else
-					{
-						this._toolID = default(int);
-					}
-					this.SendPropertyChanged("Tool");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Workout_WorkoutTool", Storage="_Workout", ThisKey="workoutID", OtherKey="workoutID", IsForeignKey=true)]
 		public Workout Workout
 		{
@@ -414,105 +391,37 @@ namespace MacGym_DB
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tools")]
-	public partial class Tool : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _toolID;
-		
-		private string _name;
-		
-		private EntitySet<WorkoutTool> _WorkoutTools;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OntoolIDChanging(int value);
-    partial void OntoolIDChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    #endregion
-		
-		public Tool()
-		{
-			this._WorkoutTools = new EntitySet<WorkoutTool>(new Action<WorkoutTool>(this.attach_WorkoutTools), new Action<WorkoutTool>(this.detach_WorkoutTools));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_toolID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int toolID
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tool_WorkoutTool", Storage="_Tool", ThisKey="toolID", OtherKey="toolID", IsForeignKey=true)]
+		public Tool Tool
 		{
 			get
 			{
-				return this._toolID;
+				return this._Tool.Entity;
 			}
 			set
 			{
-				if ((this._toolID != value))
+				Tool previousValue = this._Tool.Entity;
+				if (((previousValue != value) 
+							|| (this._Tool.HasLoadedOrAssignedValue == false)))
 				{
-					this.OntoolIDChanging(value);
 					this.SendPropertyChanging();
-					this._toolID = value;
-					this.SendPropertyChanged("toolID");
-					this.OntoolIDChanged();
+					if ((previousValue != null))
+					{
+						this._Tool.Entity = null;
+						previousValue.WorkoutTools.Remove(this);
+					}
+					this._Tool.Entity = value;
+					if ((value != null))
+					{
+						value.WorkoutTools.Add(this);
+						this._toolID = value.toolID;
+					}
+					else
+					{
+						this._toolID = default(int);
+					}
+					this.SendPropertyChanged("Tool");
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tool_WorkoutTool", Storage="_WorkoutTools", ThisKey="toolID", OtherKey="toolID")]
-		public EntitySet<WorkoutTool> WorkoutTools
-		{
-			get
-			{
-				return this._WorkoutTools;
-			}
-			set
-			{
-				this._WorkoutTools.Assign(value);
 			}
 		}
 		
@@ -534,18 +443,6 @@ namespace MacGym_DB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_WorkoutTools(WorkoutTool entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tool = this;
-		}
-		
-		private void detach_WorkoutTools(WorkoutTool entity)
-		{
-			this.SendPropertyChanging();
-			entity.Tool = null;
 		}
 	}
 	
@@ -1083,6 +980,299 @@ namespace MacGym_DB
 		{
 			this.SendPropertyChanging();
 			entity.Workout = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tools")]
+	public partial class Tool : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _toolID;
+		
+		private string _name;
+		
+		private EntitySet<WorkoutTool> _WorkoutTools;
+		
+		private EntitySet<ToolImage> _ToolImages;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OntoolIDChanging(int value);
+    partial void OntoolIDChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    #endregion
+		
+		public Tool()
+		{
+			this._WorkoutTools = new EntitySet<WorkoutTool>(new Action<WorkoutTool>(this.attach_WorkoutTools), new Action<WorkoutTool>(this.detach_WorkoutTools));
+			this._ToolImages = new EntitySet<ToolImage>(new Action<ToolImage>(this.attach_ToolImages), new Action<ToolImage>(this.detach_ToolImages));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_toolID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int toolID
+		{
+			get
+			{
+				return this._toolID;
+			}
+			set
+			{
+				if ((this._toolID != value))
+				{
+					this.OntoolIDChanging(value);
+					this.SendPropertyChanging();
+					this._toolID = value;
+					this.SendPropertyChanged("toolID");
+					this.OntoolIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tool_WorkoutTool", Storage="_WorkoutTools", ThisKey="toolID", OtherKey="toolID")]
+		public EntitySet<WorkoutTool> WorkoutTools
+		{
+			get
+			{
+				return this._WorkoutTools;
+			}
+			set
+			{
+				this._WorkoutTools.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tool_ToolImage", Storage="_ToolImages", ThisKey="toolID", OtherKey="toolID")]
+		public EntitySet<ToolImage> ToolImages
+		{
+			get
+			{
+				return this._ToolImages;
+			}
+			set
+			{
+				this._ToolImages.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_WorkoutTools(WorkoutTool entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tool = this;
+		}
+		
+		private void detach_WorkoutTools(WorkoutTool entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tool = null;
+		}
+		
+		private void attach_ToolImages(ToolImage entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tool = this;
+		}
+		
+		private void detach_ToolImages(ToolImage entity)
+		{
+			this.SendPropertyChanging();
+			entity.Tool = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ToolImages")]
+	public partial class ToolImage : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _toolImageID;
+		
+		private int _toolID;
+		
+		private string _image;
+		
+		private EntityRef<Tool> _Tool;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OntoolImageIDChanging(int value);
+    partial void OntoolImageIDChanged();
+    partial void OntoolIDChanging(int value);
+    partial void OntoolIDChanged();
+    partial void OnimageChanging(string value);
+    partial void OnimageChanged();
+    #endregion
+		
+		public ToolImage()
+		{
+			this._Tool = default(EntityRef<Tool>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_toolImageID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int toolImageID
+		{
+			get
+			{
+				return this._toolImageID;
+			}
+			set
+			{
+				if ((this._toolImageID != value))
+				{
+					this.OntoolImageIDChanging(value);
+					this.SendPropertyChanging();
+					this._toolImageID = value;
+					this.SendPropertyChanged("toolImageID");
+					this.OntoolImageIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_toolID", DbType="Int NOT NULL")]
+		public int toolID
+		{
+			get
+			{
+				return this._toolID;
+			}
+			set
+			{
+				if ((this._toolID != value))
+				{
+					if (this._Tool.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OntoolIDChanging(value);
+					this.SendPropertyChanging();
+					this._toolID = value;
+					this.SendPropertyChanged("toolID");
+					this.OntoolIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string image
+		{
+			get
+			{
+				return this._image;
+			}
+			set
+			{
+				if ((this._image != value))
+				{
+					this.OnimageChanging(value);
+					this.SendPropertyChanging();
+					this._image = value;
+					this.SendPropertyChanged("image");
+					this.OnimageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tool_ToolImage", Storage="_Tool", ThisKey="toolID", OtherKey="toolID", IsForeignKey=true)]
+		public Tool Tool
+		{
+			get
+			{
+				return this._Tool.Entity;
+			}
+			set
+			{
+				Tool previousValue = this._Tool.Entity;
+				if (((previousValue != value) 
+							|| (this._Tool.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Tool.Entity = null;
+						previousValue.ToolImages.Remove(this);
+					}
+					this._Tool.Entity = value;
+					if ((value != null))
+					{
+						value.ToolImages.Add(this);
+						this._toolID = value.toolID;
+					}
+					else
+					{
+						this._toolID = default(int);
+					}
+					this.SendPropertyChanged("Tool");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

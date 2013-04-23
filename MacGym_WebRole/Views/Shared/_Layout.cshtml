@@ -32,10 +32,11 @@
                 </button>
                 @Html.ActionLink("MacGym", "Index", null, new { @class = "brand" })
                 <div class="nav-collapse collapse">
-                    <form class="navbar-form pull-right">
-                        <input class="span2" placeholder="Search by keyword" type="text">
+                    @Html.BeginForm("Search", "Workout", FormMethod.Post, new { @class = "navbar-form pull-right" })
+                    {
+                        <input class="span2" placeholder="Search by keyword" type="text" name="searchText">
                         <button type="submit" class="btn">Search</button>
-                    </form>
+                    }
                 </div>
             </div>
         </div>

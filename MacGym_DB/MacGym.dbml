@@ -12,15 +12,8 @@
       <Column Name="workoutToolID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="workoutID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="toolID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Tool_WorkoutTool" Member="Tool" ThisKey="toolID" OtherKey="toolID" Type="Tool" IsForeignKey="true" />
       <Association Name="Workout_WorkoutTool" Member="Workout" ThisKey="workoutID" OtherKey="workoutID" Type="Workout" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Tools" Member="Tools">
-    <Type Name="Tool">
-      <Column Name="toolID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Association Name="Tool_WorkoutTool" Member="WorkoutTools" ThisKey="toolID" OtherKey="toolID" Type="WorkoutTool" />
+      <Association Name="Tool_WorkoutTool" Member="Tool" ThisKey="toolID" OtherKey="toolID" Type="Tool" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.WorkoutBodyParts" Member="WorkoutBodyParts">
@@ -48,6 +41,22 @@
       <Association Name="Workout_WorkoutTool" Member="WorkoutTools" ThisKey="workoutID" OtherKey="workoutID" Type="WorkoutTool" />
       <Association Name="Workout_WorkoutBodyPart" Member="WorkoutBodyParts" ThisKey="workoutID" OtherKey="workoutID" Type="WorkoutBodyPart" />
       <Association Name="Workout_WorkoutImage" Member="WorkoutImages" ThisKey="workoutID" OtherKey="workoutID" Type="WorkoutImage" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tools" Member="Tools">
+    <Type Name="Tool">
+      <Column Name="toolID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Tool_WorkoutTool" Member="WorkoutTools" ThisKey="toolID" OtherKey="toolID" Type="WorkoutTool" />
+      <Association Name="Tool_ToolImage" Member="ToolImages" ThisKey="toolID" OtherKey="toolID" Type="ToolImage" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ToolImages" Member="ToolImages">
+    <Type Name="ToolImage">
+      <Column Name="toolImageID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="toolID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="image" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Tool_ToolImage" Member="Tool" ThisKey="toolID" OtherKey="toolID" Type="Tool" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

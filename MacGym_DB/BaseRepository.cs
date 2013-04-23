@@ -8,6 +8,32 @@ using System.Threading.Tasks;
 
 namespace MacGym_DB
 {
+    public class DebugTextWriter : System.IO.TextWriter
+    {
+        public static DebugTextWriter Out
+        {
+            get
+            {
+                return new DebugTextWriter();
+            }
+        }
+
+        public override void Write(char[] buffer, int index, int count)
+        {
+            System.Diagnostics.Debug.Write(new String(buffer, index, count));
+        }
+
+        public override void Write(string value)
+        {
+            System.Diagnostics.Debug.Write(value);
+        }
+
+        public override Encoding Encoding
+        {
+            get { return System.Text.Encoding.Default; }
+        }
+    }
+
     public abstract class BaseRepository
     {
         private MacGymDataContext _db = null;
@@ -16,7 +42,13 @@ namespace MacGym_DB
             get
             {
                 if (_db == null)
+                {
                     _db = new MacGymDataContext();
+#if DEBUG
+                    _db.Log = DebugTextWriter.Out;
+#endif
+                }
+
                 return _db;
             }
         }

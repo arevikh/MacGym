@@ -40,5 +40,29 @@ namespace MacGym_DB
         {
             return DB.Workouts.FirstOrDefault(w => w.workoutID == workoutID);
         }
+
+        public List<Workout> Get(string searchText)
+        {
+            List<string> atoms = searchText.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            
+            var query = from w in DB.Workouts
+                        select w;
+            
+            var predicate = PredicateBuilder.False<Workout>();
+            foreach (var atom in atoms)
+            {
+                //Name
+                predicate = predicate.Or<Workout>(w => w.name.Contains(atom));
+
+                //Tool
+                predicate = predicate.Or<Workout>(w => w.WorkoutTools.Any(wt => wt.Tool.name.Contains(atom)));
+
+                //BodyPart
+                predicate = predicate.Or<Workout>(w => w.WorkoutBodyParts.Any(wb => wb.BodyPart.name.Contains(atom)));
+            }
+            query = query.Where(predicate).Where(predicate).Distinct();
+
+            return query.ToList();
+        }
     }
 }
