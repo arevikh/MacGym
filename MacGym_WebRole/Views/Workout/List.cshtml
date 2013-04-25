@@ -20,7 +20,7 @@
         </div>
         <div class="span10">
             <h4>@(item.Name)</h4>
-            <p>@(item.Description)</p>
+            <p>@(Html.Raw(item.Description))</p>
             <p>@(Html.ActionLink("Details", "Details", new { id = item.WorkoutID }))</p>
         </div>
     </div>    
