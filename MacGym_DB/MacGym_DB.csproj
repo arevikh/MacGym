@@ -58,7 +58,9 @@
     <Compile Include="WorkoutsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="MacGym.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>MacGym.designer.cs</LastGenOutput>
