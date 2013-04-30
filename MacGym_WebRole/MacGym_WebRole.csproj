@@ -151,6 +151,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\Images\Workouts\16.jpg" />
+    <Content Include="Content\Images\Workouts\17.jpg" />
+    <Content Include="Content\Images\Workouts\18.jpg" />
+    <Content Include="Content\Images\Workouts\19.jpg" />
+    <Content Include="Content\Images\Workouts\20.jpg" />
+    <Content Include="Content\Images\Workouts\21.jpg" />
+    <Content Include="Content\Images\Workouts\22.jpg" />
+    <Content Include="Content\Images\Workouts\23.jpg" />
+    <Content Include="Content\Images\Workouts\24.jpg" />
+    <Content Include="Content\Images\Workouts\25.jpg" />
+    <Content Include="Content\Images\Workouts\26.jpg" />
     <Content Include="Content\Images\Tools\1.png" />
     <Content Include="Content\Images\Tools\2.png" />
     <Content Include="Content\Images\Tools\3.png" />
